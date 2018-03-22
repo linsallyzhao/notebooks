@@ -1,0 +1,948 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Untitled}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{stattools} \PY{k}{import} \PY{n}{adfuller}
+        \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tsa}\PY{n+nn}{.}\PY{n+nn}{stattools} \PY{k}{import} \PY{n}{kpss}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{stats}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/statsmodels/compat/pandas.py:56: FutureWarning: The pandas.core.datetools module is deprecated and will be removed in a future version. Please use the pandas.tseries module instead.
+  from pandas.core import datetools
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{my\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/lin/教材/Financial\PYZus{}data/FinalTest/2015/FSE250\PYZus{}cleaned.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{my\PYZus{}data}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} Index(['year', ' month', ' day', ' FSE250'], dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{my\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}    year   month   day   FSE250
+        0  2015       3     4  17135.6
+        1  2015       3     3  17146.0
+        2  2015       3     2  17249.9
+        3  2015       2    27  17273.8
+        4  2015       2    26  17249.8
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{price} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{flip}\PY{p}{(}\PY{n}{my\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ FSE250}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{logR} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{price}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+         \PY{n}{logR}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 6816   -0.005884
+         6815    0.005446
+         6814    0.005939
+         6813   -0.003664
+         6812    0.007662
+         6811    0.002512
+         6810   -0.003380
+         6809    0.004979
+         6808   -0.000821
+         6807   -0.001644
+         Name:  FSE250, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{ind\PYZus{}var\PYZus{}one} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{logR}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.95}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{n}{ind\PYZus{}var\PYZus{}two} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{logR}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.99}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{n}{sortedreturn} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{logR}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Var1\PYZus{}1} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}one}\PY{p}{]}
+         \PY{n}{Var2\PYZus{}1} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}two}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Var1\PYZus{}1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Var2\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-0.014862710956004221
+-0.028797838980821666
+
+    \end{Verbatim}
+
+    To calculate HS var of \(\alpha\), you first calculate the array size *
+\(\alpha\) = index, since this number is not generally integer, index
+can be floored or capped. HS var can be difined as the index-th return
+in a acending sorted reture series. It can also be difined as the meam
+of these two.
+
+The meanning of a x\% var is that, the futrue return with the same time
+horizon will be equal or worse than this value with probability 1 - x\%
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{tail} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sortedreturn}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.1}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+         \PY{n}{body} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sortedreturn}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.8}\PY{p}{)}
+         \PY{n}{left\PYZus{}tail} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{p}{:} \PY{n}{tail}\PY{p}{]}
+         \PY{n}{body} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{tail} \PY{p}{:} \PY{n}{tail}\PY{o}{+}\PY{n}{body}\PY{p}{]}
+         \PY{n}{right\PYZus{}tail} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{tail} \PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sortedreturn}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{body}\PY{p}{)} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+6817
+6817
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{k+kn}{import} \PY{n+nn}{powerlaw}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fit} \PY{o}{=} \PY{n}{powerlaw}\PY{o}{.}\PY{n}{Fit}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{xmin}\PY{o}{=}\PY{n+nb}{min}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+             \PY{n}{alpha\PYZus{}expo} \PY{o}{=} \PY{n}{fit}\PY{o}{.}\PY{n}{power\PYZus{}law}\PY{o}{.}\PY{n}{alpha}
+             \PY{n}{fit}\PY{o}{.}\PY{n}{power\PYZus{}law}\PY{o}{.}\PY{n}{plot\PYZus{}ccdf}
+             \PY{n}{fit}\PY{o}{.}\PY{n}{plot\PYZus{}ccdf}
+             \PY{k}{return} \PY{n}{alpha\PYZus{}expo}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{left\PYZus{}tail}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/powerlaw.py:697: RuntimeWarning: invalid value encountered in true\_divide
+  (Theoretical\_CDF * (1 - Theoretical\_CDF))
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}93}]:} 1.8986698556906911
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/powerlaw.py:697: RuntimeWarning: invalid value encountered in true\_divide
+  (Theoretical\_CDF * (1 - Theoretical\_CDF))
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}94}]:} 2.2552008132588406
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n}{left\PYZus{}gen\PYZus{}para} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{left\PYZus{}tail}\PY{p}{)}
+         \PY{n}{right\PYZus{}gen\PYZus{}para} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/scipy/stats/\_continuous\_distns.py:2062: RuntimeWarning: divide by zero encountered in true\_divide
+  val = val + cnk * (-1) ** ki / (1.0 - c * ki)
+/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/scipy/stats/\_distn\_infrastructure.py:1037: RuntimeWarning: invalid value encountered in subtract
+  mu2 = mu2p - mu * mu
+/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/scipy/stats/\_distn\_infrastructure.py:2306: RuntimeWarning: invalid value encountered in double\_scalars
+  Lhat = muhat - Shat*mu
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{n}{left\PYZus{}gen\PYZus{}para}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}90}]:} (0.0677012736493009, 0.009356181933238374, 0.0074280469785549565)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{n}{right\PYZus{}gen\PYZus{}para}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}91}]:} (0.14087333589304923, 0.00943918347962876, 0.005537415141010858)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{left} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{flip}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+         \PY{n}{right} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}86}]:} 0    682
+         dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{right}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{right}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{right}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{right}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}98}]:} [<matplotlib.lines.Line2D at 0x7f69641f7ef0>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}107}]:} array([-3.30576442])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}  \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}108}]:} array([-3.15593965])
+\end{Verbatim}
+            
+    \hypertarget{this-is-not-alpha-still-dont-know-the-relationship}{%
+\section{This is not alpha, still don't know the
+relationship}\label{this-is-not-alpha-still-dont-know-the-relationship}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha for left tail is : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha for right tail is : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+alpha for left tail is : 
+14.77077085994122
+alpha for right tail is : 
+7.098575423522291
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{integrate} \PY{k}{as} \PY{n+nn}{integrate}
+         
+         \PY{n}{pdf} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{/} \PY{n}{integrate}\PY{o}{.}\PY{n}{trapz}\PY{p}{(}\PY{n}{pdf}\PY{p}{,} \PY{n}{left\PYZus{}tail}\PY{p}{,} \PY{n}{dx} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{A}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} 0.19644028411278575
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{pdf} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{B} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{/} \PY{n}{integrate}\PY{o}{.}\PY{n}{trapz}\PY{p}{(}\PY{n}{pdf}\PY{p}{,} \PY{n}{right\PYZus{}tail}\PY{p}{,} \PY{n}{dx} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{B}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} 0.09998634131996074
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{k}{def} \PY{n+nf}{function}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{x0}\PY{p}{,} \PY{n}{a}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{x0}\PY{o}{/}\PY{n}{a}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{x0}\PY{o}{/}\PY{n}{x}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{n}{a}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{/} \PY{p}{(}\PY{n}{function}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{1.8986698556906911}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{function}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{1.8986698556906911}\PY{p}{)}\PY{p}{)}
+          \PY{n}{A}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}110}]:} 20.783129956116387
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{/} \PY{p}{(}\PY{n}{function}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{2.2552008132588406}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{function}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{2.2552008132588406}\PY{p}{)}\PY{p}{)}
+          \PY{n}{A}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}112}]:} 24.119612585270822
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{body}\PY{p}{)}
+         \PY{n}{mu}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} 0.0005412379942985588
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{sigma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{body}\PY{p}{)}
+         \PY{n}{sigma}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} 0.0043988280389262455
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{body}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} array([-0.00935198, -0.00935145, -0.00931985, {\ldots},  0.00941958,
+                 0.00943076,  0.00943241])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{optimize} \PY{k}{import} \PY{n}{minimize}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{special} \PY{k}{import} \PY{n}{erf}
+         \PY{n}{cost\PYZus{}fun} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{(}\PY{p}{(}\PY{n}{erf}\PY{p}{(}\PY{p}{(}\PY{n}{mu} \PY{o}{\PYZhy{}} \PY{n}{body}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{erf}\PY{p}{(}\PY{p}{(}\PY{n}{body}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{mu}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{1.6}\PY{p}{)} \PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{res} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{cost\PYZus{}fun}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{method} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SLSQP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{res}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:}      fun: 9.43884967350049e-08
+              jac: array([0.07546487])
+          message: 'Optimization terminated successfully.'
+             nfev: 44
+              nit: 9
+             njev: 9
+           status: 0
+          success: True
+                x: array([0.00731412])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{res}\PY{o}{.}\PY{n}{x}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} array([0.00731412])
+\end{Verbatim}
+            
+    sigma is saying what I see (body) is all the possibility, but res.x is
+saying what I see is only 80\% of the possibility
+
+So res.x is giving a wider distribution
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{k}{def} \PY{n+nf}{resample}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{days}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+             \PY{n}{resampled} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{/}\PY{n}{days}\PY{p}{)}\PY{p}{)}
+             \PY{n}{j} \PY{o}{=} \PY{n}{days}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{resampled}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{resampled}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{j}\PY{o}{\PYZhy{}}\PY{n}{days}\PY{p}{:}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{j} \PY{o}{=} \PY{n}{j} \PY{o}{+} \PY{n}{days}
+             \PY{k}{return} \PY{n}{resampled}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{re20} \PY{o}{=} \PY{n}{resample}\PY{p}{(}\PY{n}{logR}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{ind\PYZus{}var\PYZus{}one} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{re20}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.95}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{n}{ind\PYZus{}var\PYZus{}two} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{re20}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.99}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         \PY{n}{sortedreturn} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{re20}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Var1\PYZus{}20} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}one}\PY{p}{]}
+         \PY{n}{Var2\PYZus{}20} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}two}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Var1\PYZus{}20}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Var2\PYZus{}20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-0.07809135343029716
+-0.12813632148758636
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+          \PY{n}{Hest1} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{Var1\PYZus{}20}\PY{o}{/}\PY{n}{Var1\PYZus{}1}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{Hest1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}114}]:} 0.5537957774406126
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{Hest2} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{Var2\PYZus{}20}\PY{o}{/}\PY{n}{Var2\PYZus{}1}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{Hest2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}113}]:} 0.49830699927981326
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{n}{H} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{n}{Hest1} \PY{o}{+} \PY{n}{Hest2}\PY{p}{)}
+          \PY{n}{H}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}116}]:} 0.5260513883602129
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{tail20} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re20}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.1}\PY{p}{)}
+          \PY{n}{body20} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re20}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.8}\PY{p}{)}
+          \PY{n}{left\PYZus{}tail20} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{p}{:} \PY{n}{tail20}\PY{p}{]}
+          \PY{n}{body20} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{tail20} \PY{p}{:} \PY{n}{tail20}\PY{o}{+}\PY{n}{body20}\PY{p}{]}
+          \PY{n}{right\PYZus{}tail20} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{tail20} \PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sortedreturn}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{left\PYZus{}tail20}\PY{p}{)} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{body20}\PY{p}{)} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{right\PYZus{}tail20}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+340
+340
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{n}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{left\PYZus{}tail20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/powerlaw.py:697: RuntimeWarning: invalid value encountered in true\_divide
+  (Theoretical\_CDF * (1 - Theoretical\_CDF))
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}122}]:} 2.456358035254785
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}123}]:} \PY{n}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{n}{right\PYZus{}tail20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/powerlaw.py:697: RuntimeWarning: invalid value encountered in true\_divide
+  (Theoretical\_CDF * (1 - Theoretical\_CDF))
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}123}]:} 2.961122651737337
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{port} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/lin/教材/Financial\PYZus{}data/FinalTest/2015/portfolio\PYZus{}cleaned.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{port}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}125}]:}    year   month   day      RSW    OXIG    MGAM   HLMA     DNO
+          0  2015       3     4  2544.50  811.30  316.38  706.0  732.24
+          1  2015       3     3  2540.52  801.35  320.10  698.0  730.28
+          2  2015       3     2  2587.29  794.38  319.71  713.0  733.22
+          3  2015       2    27  2597.24  753.07  322.45  712.5  754.30
+          4  2015       2    26  2635.06  765.01  323.14  716.5  742.04
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{newPort} \PY{o}{=} \PY{n}{port}\PY{p}{[}\PY{n}{port}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{:}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{newPort}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}127}]:}        RSW    OXIG    MGAM   HLMA     DNO
+          0  2544.50  811.30  316.38  706.0  732.24
+          1  2540.52  801.35  320.10  698.0  730.28
+          2  2587.29  794.38  319.71  713.0  733.22
+          3  2597.24  753.07  322.45  712.5  754.30
+          4  2635.06  765.01  323.14  716.5  742.04
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{corrcoeff} \PY{o}{=} \PY{n}{newPort}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+          \PY{n}{corrcoeff}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}128}]:}             RSW      OXIG      MGAM      HLMA       DNO
+           RSW   1.000000  0.896548  0.736502  0.965742  0.968856
+           OXIG  0.896548  1.000000  0.742184  0.910246  0.897473
+           MGAM  0.736502  0.742184  1.000000  0.734705  0.717033
+           HLMA  0.965742  0.910246  0.734705  1.000000  0.967579
+           DNO   0.968856  0.897473  0.717033  0.967579  1.000000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{n}{KenTau} \PY{o}{=} \PY{n}{newPort}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kendall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{KenTau}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}129}]:}             RSW      OXIG      MGAM      HLMA       DNO
+           RSW   1.000000  0.465286  0.426206  0.798144  0.797464
+           OXIG  0.465286  1.000000  0.556772  0.530655  0.437165
+           MGAM  0.426206  0.556772  1.000000  0.423881  0.346154
+           HLMA  0.798144  0.530655  0.423881  1.000000  0.777508
+           DNO   0.797464  0.437165  0.346154  0.777508  1.000000
+\end{Verbatim}
+            
+    Kendall tau is non-linear correlation while Pearson is capture only
+linear Kendall tau 's limitation is only capture monotonic correlation
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{newPort}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}131}]:} (6818, 5)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{n}{allAssets} \PY{o}{=} \PY{n}{newPort}
+          \PY{n}{allAssets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{my\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ FSE250}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/ipykernel\_launcher.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}134}]:} \PY{n}{allAssets}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}134}]:}        RSW    OXIG    MGAM   HLMA     DNO    Index
+          0  2544.50  811.30  316.38  706.0  732.24  17135.6
+          1  2540.52  801.35  320.10  698.0  730.28  17146.0
+          2  2587.29  794.38  319.71  713.0  733.22  17249.9
+          3  2597.24  753.07  322.45  712.5  754.30  17273.8
+          4  2635.06  765.01  323.14  716.5  742.04  17249.8
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+          
+          \PY{n}{miMa} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n}{allAssets}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{allAssets}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+          \PY{k}{for} \PY{n}{ref\PYZus{}col} \PY{o+ow}{in} \PY{n}{allAssets}\PY{p}{:}
+              \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{allAssets}\PY{p}{:}
+                  \PY{n}{miMa}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{mutual\PYZus{}info\PYZus{}score}\PY{p}{(}\PY{n}{allAssets}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]}\PY{p}{,} \PY{n}{allAssets}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{)}
+          \PY{n}{miMa}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}136}]:}             RSW      OXIG      MGAM      HLMA       DNO     Index
+           RSW   7.705392  6.710876  6.927814  6.779426  6.750474  7.671663
+           OXIG  6.710876  7.520116  6.721991  6.547011  6.523039  7.486996
+           MGAM  6.927814  6.721991  7.886943  6.810198  6.697654  7.853214
+           HLMA  6.779426  6.547011  6.810198  7.615197  6.552787  7.580934
+           DNO   6.750474  6.523039  6.697654  6.552787  7.466092  7.431956
+          Index  7.671663  7.486996  7.853214  7.580934  7.431956  8.773098
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{KenTau} \PY{o}{=} \PY{n}{allAssets}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kendall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{KenTau}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}137}]:}             RSW      OXIG      MGAM      HLMA       DNO     Index
+           RSW   1.000000  0.465286  0.426206  0.798144  0.797464  0.855035
+           OXIG  0.465286  1.000000  0.556772  0.530655  0.437165  0.469570
+           MGAM  0.426206  0.556772  1.000000  0.423881  0.346154  0.475658
+           HLMA  0.798144  0.530655  0.423881  1.000000  0.777508  0.812092
+           DNO   0.797464  0.437165  0.346154  0.777508  1.000000  0.806611
+          Index  0.855035  0.469570  0.475658  0.812092  0.806611  1.000000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{n}{corrcoeff} \PY{o}{=} \PY{n}{allAssets}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+          \PY{n}{corrcoeff}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}138}]:}             RSW      OXIG      MGAM      HLMA       DNO     Index
+           RSW   1.000000  0.896548  0.736502  0.965742  0.968856  0.924308
+           OXIG  0.896548  1.000000  0.742184  0.910246  0.897473  0.766453
+           MGAM  0.736502  0.742184  1.000000  0.734705  0.717033  0.714831
+           HLMA  0.965742  0.910246  0.734705  1.000000  0.967579  0.918142
+           DNO   0.968856  0.897473  0.717033  0.967579  1.000000  0.928147
+          Index  0.924308  0.766453  0.714831  0.918142  0.928147  1.000000
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
