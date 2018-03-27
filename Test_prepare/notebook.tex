@@ -141,7 +141,7 @@
     \def\gt{>}
     \def\lt{<}
     % Document parameters
-    \title{Untitled}
+    \title{TEST}
     
     
     
@@ -297,72 +297,128 @@
     \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{my\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/lin/教材/Financial\PYZus{}data/FinalTest/2015/FSE250\PYZus{}cleaned.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{my\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/lin/教材/Financial\PYZus{}data/FinalTest/Dataset.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{my\PYZus{}data}\PY{o}{.}\PY{n}{columns}
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{my\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}8}]:} Index(['year', ' month', ' day', ' FSE250'], dtype='object')
+{\color{outcolor}Out[{\color{outcolor}3}]:}       S1     S2     S3
+        0  42.10  23.80  46.05
+        1  44.20  23.80  45.92
+        2  44.94  23.57  46.14
+        3  44.86  23.58  46.07
+        4  43.64  23.29  44.09
 \end{Verbatim}
             
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{my\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{logR} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{my\PYZus{}data}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{q-1}{%
+\subsection{Q 1}\label{q-1}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{logR}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}9}]:}    year   month   day   FSE250
-        0  2015       3     4  17135.6
-        1  2015       3     3  17146.0
-        2  2015       3     2  17249.9
-        3  2015       2    27  17273.8
-        4  2015       2    26  17249.8
+{\color{outcolor}Out[{\color{outcolor}15}]:}                 S1           S2           S3
+         count  2499.000000  2499.000000  2499.000000
+         mean      0.000206    -0.000182    -0.000565
+         std       0.045696     0.031346     0.054522
 \end{Verbatim}
             
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{price} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{flip}\PY{p}{(}\PY{n}{my\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ FSE250}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
-\end{Verbatim}
-
+    \hypertarget{skewness-for-three-stocks}{%
+\subsection{Skewness for three stocks}\label{skewness-for-three-stocks}}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{logR} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{price}\PY{p}{)}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
-         \PY{n}{logR}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{skew}\PY{p}{(}\PY{n}{logR}\PY{p}{)}
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}20}]:} 6816   -0.005884
-         6815    0.005446
-         6814    0.005939
-         6813   -0.003664
-         6812    0.007662
-         6811    0.002512
-         6810   -0.003380
-         6809    0.004979
-         6808   -0.000821
-         6807   -0.001644
-         Name:  FSE250, dtype: float64
+{\color{outcolor}Out[{\color{outcolor}13}]:} array([-3.73482945e-03, -4.64590384e+00, -5.24419564e-01])
 \end{Verbatim}
             
+    \hypertarget{kurtosis-for-three-stocks}{%
+\subsection{Kurtosis for three stocks}\label{kurtosis-for-three-stocks}}
+
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{ind\PYZus{}var\PYZus{}one} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{logR}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.95}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
-         \PY{n}{ind\PYZus{}var\PYZus{}two} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{logR}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.99}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
-         \PY{n}{sortedreturn} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{logR}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
-         \PY{n}{Var1\PYZus{}1} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}one}\PY{p}{]}
-         \PY{n}{Var2\PYZus{}1} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}two}\PY{p}{]}
-         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Var1\PYZus{}1}\PY{p}{)}
-         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Var2\PYZus{}1}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{kurtosis}\PY{p}{(}\PY{n}{logR}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} array([ 21.88308304, 131.78438552,  38.2654605 ])
+\end{Verbatim}
+            
+    \hypertarget{comments}{%
+\subsection{Comments}\label{comments}}
+
+Skewness are negative which means more returns are negative while normal
+distribution is symetric.
+
+Kurtosis are way higher than 3 indicating fatter tails than normal with
+3 as kurtosis. However, the fourth moments may not be defined which
+means kurtosis may eventually goes to infinity.
+
+    \hypertarget{q-2}{%
+\subsection{Q 2}\label{q-2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{sort\PYZus{}LR} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{logR}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{logR}\PY{p}{:}
+             \PY{n}{sort\PYZus{}LR}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{logR}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}
+         \PY{n}{sort\PYZus{}LR}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
--0.014862710956004221
--0.028797838980821666
+{\color{incolor}In [{\color{incolor}106}]:} \PY{k}{def} \PY{n+nf}{HS\PYZus{}var\PYZus{}ES}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{alpha\PYZus{}one}\PY{p}{,} \PY{n}{alpha\PYZus{}two}\PY{p}{,} \PY{n}{alpha\PYZus{}es}\PY{p}{)}\PY{p}{:}
+              \PY{n}{ind\PYZus{}var\PYZus{}one} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(} \PY{n}{data}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{alpha\PYZus{}one}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+              \PY{n}{ind\PYZus{}var\PYZus{}two} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(} \PY{n}{data}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{alpha\PYZus{}two}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+              \PY{n}{ind\PYZus{}es} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(} \PY{n}{data}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{alpha\PYZus{}es}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+              \PY{n}{HS\PYZus{}var\PYZus{}ones} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}one}\PY{p}{]}
+              \PY{n}{HS\PYZus{}var\PYZus{}twos} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}two}\PY{p}{]}
+              \PY{n}{HS\PYZus{}ES} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{n}{ind\PYZus{}es}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+              
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Historical 5}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Var is : }\PY{l+s+si}{\PYZob{}HS\PYZus{}var\PYZus{}ones\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}print(f\PYZsq{}Historical \PYZob{}alpha\PYZus{}two * 100\PYZcb{}\PYZpc{} Var is : \PYZob{}HS\PYZus{}var\PYZus{}twos\PYZcb{}\PYZsq{})}
+              \PY{c+c1}{\PYZsh{}print(f\PYZsq{}Historical \PYZob{}alpha\PYZus{}es * 100\PYZcb{}\PYZpc{} ES is : \PYZob{}HS\PYZus{}ES\PYZcb{}\PYZsq{})}
+          
+              \PY{k}{return} \PY{n}{HS\PYZus{}var\PYZus{}ones}
+          
+          \PY{c+c1}{\PYZsh{}In put is sorted (accending) log returns, when calculating var and ES, using floor of the index (size * alpha)}
+          
+          \PY{c+c1}{\PYZsh{}example for sorting}
+          
+          \PY{c+c1}{\PYZsh{}sortedreturn = np.asarray(np.sort(re20))}
+          \PY{c+c1}{\PYZsh{}sortedreturn = np.asarray(logR.sort\PYZus{}values())}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{sort\PYZus{}LR}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{For stock }\PY{l+s+si}{\PYZob{}col\PYZcb{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{HS\PYZus{}var\PYZus{}ES}\PY{p}{(}\PY{n}{sort\PYZus{}LR}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For stock S1,
+Historical 5\% Var is : -0.06415930785472801
+For stock S2,
+Historical 5\% Var is : -0.03722934176835602
+For stock S3,
+Historical 5\% Var is : -0.06178435253208292
 
     \end{Verbatim}
 
@@ -375,42 +431,56 @@ of these two.
 The meanning of a x\% var is that, the futrue return with the same time
 horizon will be equal or worse than this value with probability 1 - x\%
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{tail} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sortedreturn}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.1}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
-         \PY{n}{body} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sortedreturn}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.8}\PY{p}{)}
-         \PY{n}{left\PYZus{}tail} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{p}{:} \PY{n}{tail}\PY{p}{]}
-         \PY{n}{body} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{tail} \PY{p}{:} \PY{n}{tail}\PY{o}{+}\PY{n}{body}\PY{p}{]}
-         \PY{n}{right\PYZus{}tail} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{tail} \PY{p}{:}\PY{p}{]}
-\end{Verbatim}
-
+    \hypertarget{q3}{%
+\subsection{Q3}\label{q3}}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}29}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sortedreturn}\PY{p}{)}\PY{p}{)}
-         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{body}\PY{p}{)} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-6817
-6817
-
-    \end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}92}]:} \PY{k+kn}{import} \PY{n+nn}{powerlaw}
+{\color{incolor}In [{\color{incolor}93}]:} \PY{k+kn}{import} \PY{n+nn}{powerlaw}
          \PY{k}{def} \PY{n+nf}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
-             \PY{n}{fit} \PY{o}{=} \PY{n}{powerlaw}\PY{o}{.}\PY{n}{Fit}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{xmin}\PY{o}{=}\PY{n+nb}{min}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+             \PY{n}{fit} \PY{o}{=} \PY{n}{powerlaw}\PY{o}{.}\PY{n}{Fit}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{xmin}\PY{o}{=}\PY{n+nb}{min}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,} \PY{n}{fit\PYZus{}method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Likelihood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
              \PY{n}{alpha\PYZus{}expo} \PY{o}{=} \PY{n}{fit}\PY{o}{.}\PY{n}{power\PYZus{}law}\PY{o}{.}\PY{n}{alpha}
              \PY{n}{fit}\PY{o}{.}\PY{n}{power\PYZus{}law}\PY{o}{.}\PY{n}{plot\PYZus{}ccdf}
              \PY{n}{fit}\PY{o}{.}\PY{n}{plot\PYZus{}ccdf}
              \PY{k}{return} \PY{n}{alpha\PYZus{}expo}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         
+         \PY{k}{def} \PY{n+nf}{tail\PYZus{}expo\PYZus{}powerlaw}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)}\PY{p}{:}
+             \PY{n}{alphaL} \PY{o}{=} \PY{n}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{left\PYZus{}tail}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tail exponent for the left tail is }\PY{l+s+si}{\PYZob{}alphaL\PYZcb{}}\PY{l+s+s1}{ based on max likelyhood estimation (using pythonpacage powerlaw)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             
+             
+             \PY{n}{left} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{flip}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}right = pd.DataFrame(right\PYZus{}tail, columns=[\PYZsq{}x\PYZsq{}], dtype=float)}
+             \PY{n}{domain} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{left}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{left}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{left}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}plt.loglog(right[\PYZsq{}x\PYZsq{}], 1 \PYZhy{} (range(1, right.count()[0] + 1))/(right.count()[0] + 1), \PYZsq{}xr\PYZsq{}, alpha = 0.5)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{domain}\PY{p}{,} \PY{p}{(}\PY{n}{domain}\PY{o}{*}\PY{l+m+mi}{15}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{alphaL}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}.b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}plt.loglog(domain, (domain*110) ** (\PYZhy{}alphaR), \PYZsq{}\PYZhy{}.r\PYZsq{})}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{left\PYZus{}tail}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}94}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{sort\PYZus{}LR}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{For stock }\PY{l+s+si}{\PYZob{}col\PYZcb{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{left\PYZus{}tail} \PY{o}{=} \PY{n}{sort\PYZus{}LR}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{sort\PYZus{}LR}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{HS\PYZus{}var\PYZus{}ES}\PY{p}{(}\PY{n}{sort\PYZus{}LR}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{)}\PY{p}{]}
+             \PY{n}{tail\PYZus{}expo\PYZus{}powerlaw}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)}
 \end{Verbatim}
 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For stock S1,
+Historical 5\% Var is : -0.06415930785472801
+Tail exponent for the left tail is 2.093595854216556 based on max likelyhood estimation (using pythonpacage powerlaw)
+For stock S2,
+Historical 5\% Var is : -0.03722934176835602
+Tail exponent for the left tail is 2.377002203068422 based on max likelyhood estimation (using pythonpacage powerlaw)
+For stock S3,
+Historical 5\% Var is : -0.06178435253208292
+Tail exponent for the left tail is 1.809218385527358 based on max likelyhood estimation (using pythonpacage powerlaw)
+
+    \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
 /home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/powerlaw.py:697: RuntimeWarning: invalid value encountered in true\_divide
@@ -418,251 +488,26 @@ horizon will be equal or worse than this value with probability 1 - x\%
 
     \end{Verbatim}
 
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}93}]:} 1.8986698556906911
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/powerlaw.py:697: RuntimeWarning: invalid value encountered in true\_divide
-  (Theoretical\_CDF * (1 - Theoretical\_CDF))
-
-    \end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}94}]:} 2.2552008132588406
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}89}]:} \PY{n}{left\PYZus{}gen\PYZus{}para} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{left\PYZus{}tail}\PY{p}{)}
-         \PY{n}{right\PYZus{}gen\PYZus{}para} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/scipy/stats/\_continuous\_distns.py:2062: RuntimeWarning: divide by zero encountered in true\_divide
-  val = val + cnk * (-1) ** ki / (1.0 - c * ki)
-/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/scipy/stats/\_distn\_infrastructure.py:1037: RuntimeWarning: invalid value encountered in subtract
-  mu2 = mu2p - mu * mu
-/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/scipy/stats/\_distn\_infrastructure.py:2306: RuntimeWarning: invalid value encountered in double\_scalars
-  Lhat = muhat - Shat*mu
-
-    \end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}90}]:} \PY{n}{left\PYZus{}gen\PYZus{}para}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}90}]:} (0.0677012736493009, 0.009356181933238374, 0.0074280469785549565)
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}91}]:} \PY{n}{right\PYZus{}gen\PYZus{}para}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}91}]:} (0.14087333589304923, 0.00943918347962876, 0.005537415141010858)
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{left} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{flip}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
-         \PY{n}{right} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}86}]:} 0    682
-         dtype: int64
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{right}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{right}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{left}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-         \PY{n}{plt}\PY{o}{.}\PY{n}{loglog}\PY{p}{(}\PY{n}{right}\PY{p}{,} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{right}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}98}]:} [<matplotlib.lines.Line2D at 0x7f69641f7ef0>]
-\end{Verbatim}
-            
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_2.png}
     \end{center}
     { \hspace*{\fill} \\}
     
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}107}]:} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{left}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}107}]:} array([-3.30576442])
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}108}]:} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}  \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{right}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}108}]:} array([-3.15593965])
-\end{Verbatim}
-            
-    \hypertarget{this-is-not-alpha-still-dont-know-the-relationship}{%
-\section{This is not alpha, still don't know the
-relationship}\label{this-is-not-alpha-still-dont-know-the-relationship}}
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{q4}{%
+\subsection{Q4}\label{q4}}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}95}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha for left tail is : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-         \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
-         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha for right tail is : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-         \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-alpha for left tail is : 
-14.77077085994122
-alpha for right tail is : 
-7.098575423522291
-
-    \end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}44}]:} \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{integrate} \PY{k}{as} \PY{n+nn}{integrate}
-         
-         \PY{n}{pdf} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{left\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
-         \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{/} \PY{n}{integrate}\PY{o}{.}\PY{n}{trapz}\PY{p}{(}\PY{n}{pdf}\PY{p}{,} \PY{n}{left\PYZus{}tail}\PY{p}{,} \PY{n}{dx} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{)}
-         \PY{n}{A}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}44}]:} 0.19644028411278575
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{pdf} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{genpareto}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{right\PYZus{}gen\PYZus{}para}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
-         \PY{n}{B} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{/} \PY{n}{integrate}\PY{o}{.}\PY{n}{trapz}\PY{p}{(}\PY{n}{pdf}\PY{p}{,} \PY{n}{right\PYZus{}tail}\PY{p}{,} \PY{n}{dx} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{)}
-         \PY{n}{B}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}45}]:} 0.09998634131996074
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}109}]:} \PY{k}{def} \PY{n+nf}{function}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{x0}\PY{p}{,} \PY{n}{a}\PY{p}{)}\PY{p}{:}
-              \PY{k}{return} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{x0}\PY{o}{/}\PY{n}{a}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{x0}\PY{o}{/}\PY{n}{x}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{n}{a}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{/} \PY{p}{(}\PY{n}{function}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{1.8986698556906911}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{function}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{left\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{1.8986698556906911}\PY{p}{)}\PY{p}{)}
-          \PY{n}{A}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}110}]:} 20.783129956116387
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}112}]:} \PY{n}{A} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{o}{/} \PY{p}{(}\PY{n}{function}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{2.2552008132588406}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{function}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n}{right\PYZus{}tail}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{2.2552008132588406}\PY{p}{)}\PY{p}{)}
-          \PY{n}{A}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}112}]:} 24.119612585270822
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{mu} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{body}\PY{p}{)}
-         \PY{n}{mu}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}46}]:} 0.0005412379942985588
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{sigma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{body}\PY{p}{)}
-         \PY{n}{sigma}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}51}]:} 0.0043988280389262455
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{body}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}49}]:} array([-0.00935198, -0.00935145, -0.00931985, {\ldots},  0.00941958,
-                 0.00943076,  0.00943241])
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}52}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{optimize} \PY{k}{import} \PY{n}{minimize}
-         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{special} \PY{k}{import} \PY{n}{erf}
-         \PY{n}{cost\PYZus{}fun} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{p}{(}\PY{p}{(}\PY{n}{erf}\PY{p}{(}\PY{p}{(}\PY{n}{mu} \PY{o}{\PYZhy{}} \PY{n}{body}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{erf}\PY{p}{(}\PY{p}{(}\PY{n}{body}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{mu}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{1.6}\PY{p}{)} \PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
-         \PY{n}{res} \PY{o}{=} \PY{n}{minimize}\PY{p}{(}\PY{n}{cost\PYZus{}fun}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{method} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SLSQP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{res}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}54}]:}      fun: 9.43884967350049e-08
-              jac: array([0.07546487])
-          message: 'Optimization terminated successfully.'
-             nfev: 44
-              nit: 9
-             njev: 9
-           status: 0
-          success: True
-                x: array([0.00731412])
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{res}\PY{o}{.}\PY{n}{x}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}55}]:} array([0.00731412])
-\end{Verbatim}
-            
-    sigma is saying what I see (body) is all the possibility, but res.x is
-saying what I see is only 80\% of the possibility
-
-So res.x is giving a wider distribution
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}56}]:} \PY{k}{def} \PY{n+nf}{resample}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{days}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+{\color{incolor}In [{\color{incolor}95}]:} \PY{k}{def} \PY{n+nf}{resample}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{days}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
              \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{data}\PY{p}{)}
              \PY{n}{resampled} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{/}\PY{n}{days}\PY{p}{)}\PY{p}{)}
              \PY{n}{j} \PY{o}{=} \PY{n}{days}
@@ -670,276 +515,358 @@ So res.x is giving a wider distribution
                  \PY{n}{resampled}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{j}\PY{o}{\PYZhy{}}\PY{n}{days}\PY{p}{:}\PY{n}{j}\PY{p}{]}\PY{p}{)}
                  \PY{n}{j} \PY{o}{=} \PY{n}{j} \PY{o}{+} \PY{n}{days}
              \PY{k}{return} \PY{n}{resampled}
+         
+         \PY{c+c1}{\PYZsh{}input is daily log return series}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{re20} \PY{o}{=} \PY{n}{resample}\PY{p}{(}\PY{n}{logR}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{Yearly} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{logR}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{logR}\PY{p}{:}
+             \PY{n}{Yearly}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{resample}\PY{p}{(}\PY{n}{logR}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{,} \PY{n}{days}\PY{o}{=}\PY{l+m+mi}{250}\PY{p}{)}
+         \PY{n}{Yearly}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{ind\PYZus{}var\PYZus{}one} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{re20}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.95}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
-         \PY{n}{ind\PYZus{}var\PYZus{}two} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{re20}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.99}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
-         \PY{n}{sortedreturn} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{re20}\PY{p}{)}\PY{p}{)}
-         \PY{n}{Var1\PYZus{}20} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}one}\PY{p}{]}
-         \PY{n}{Var2\PYZus{}20} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}two}\PY{p}{]}
-         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Var1\PYZus{}20}\PY{p}{)}
-         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Var2\PYZus{}20}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
--0.07809135343029716
--0.12813632148758636
-
-    \end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}114}]:} \PY{k+kn}{import} \PY{n+nn}{math}
-          \PY{n}{Hest1} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{Var1\PYZus{}20}\PY{o}{/}\PY{n}{Var1\PYZus{}1}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
-          \PY{n}{Hest1}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}114}]:} 0.5537957774406126
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{Hest2} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{Var2\PYZus{}20}\PY{o}{/}\PY{n}{Var2\PYZus{}1}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
-          \PY{n}{Hest2}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}113}]:} 0.49830699927981326
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}116}]:} \PY{n}{H} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{n}{Hest1} \PY{o}{+} \PY{n}{Hest2}\PY{p}{)}
-          \PY{n}{H}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}116}]:} 0.5260513883602129
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{tail20} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re20}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.1}\PY{p}{)}
-          \PY{n}{body20} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re20}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.8}\PY{p}{)}
-          \PY{n}{left\PYZus{}tail20} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{p}{:} \PY{n}{tail20}\PY{p}{]}
-          \PY{n}{body20} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{n}{tail20} \PY{p}{:} \PY{n}{tail20}\PY{o}{+}\PY{n}{body20}\PY{p}{]}
-          \PY{n}{right\PYZus{}tail20} \PY{o}{=} \PY{n}{sortedreturn}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{tail20} \PY{p}{:}\PY{p}{]}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}121}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sortedreturn}\PY{p}{)}\PY{p}{)}
-          \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{left\PYZus{}tail20}\PY{p}{)} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{body20}\PY{p}{)} \PY{o}{+} \PY{n+nb}{len}\PY{p}{(}\PY{n}{right\PYZus{}tail20}\PY{p}{)}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-340
-340
-
-    \end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}122}]:} \PY{n}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{left\PYZus{}tail20}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/powerlaw.py:697: RuntimeWarning: invalid value encountered in true\_divide
-  (Theoretical\_CDF * (1 - Theoretical\_CDF))
-
-    \end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}122}]:} 2.456358035254785
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}123}]:} \PY{n}{get\PYZus{}alpha\PYZus{}and\PYZus{}start}\PY{p}{(}\PY{n}{right\PYZus{}tail20}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/powerlaw.py:697: RuntimeWarning: invalid value encountered in true\_divide
-  (Theoretical\_CDF * (1 - Theoretical\_CDF))
-
-    \end{Verbatim}
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}123}]:} 2.961122651737337
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{port} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/lin/教材/Financial\PYZus{}data/FinalTest/2015/portfolio\PYZus{}cleaned.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{port}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}125}]:}    year   month   day      RSW    OXIG    MGAM   HLMA     DNO
-          0  2015       3     4  2544.50  811.30  316.38  706.0  732.24
-          1  2015       3     3  2540.52  801.35  320.10  698.0  730.28
-          2  2015       3     2  2587.29  794.38  319.71  713.0  733.22
-          3  2015       2    27  2597.24  753.07  322.45  712.5  754.30
-          4  2015       2    26  2635.06  765.01  323.14  716.5  742.04
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{newPort} \PY{o}{=} \PY{n}{port}\PY{p}{[}\PY{n}{port}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{:}\PY{p}{]}\PY{p}{]}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{newPort}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}127}]:}        RSW    OXIG    MGAM   HLMA     DNO
-          0  2544.50  811.30  316.38  706.0  732.24
-          1  2540.52  801.35  320.10  698.0  730.28
-          2  2587.29  794.38  319.71  713.0  733.22
-          3  2597.24  753.07  322.45  712.5  754.30
-          4  2635.06  765.01  323.14  716.5  742.04
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{corrcoeff} \PY{o}{=} \PY{n}{newPort}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
-          \PY{n}{corrcoeff}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}128}]:}             RSW      OXIG      MGAM      HLMA       DNO
-           RSW   1.000000  0.896548  0.736502  0.965742  0.968856
-           OXIG  0.896548  1.000000  0.742184  0.910246  0.897473
-           MGAM  0.736502  0.742184  1.000000  0.734705  0.717033
-           HLMA  0.965742  0.910246  0.734705  1.000000  0.967579
-           DNO   0.968856  0.897473  0.717033  0.967579  1.000000
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}129}]:} \PY{n}{KenTau} \PY{o}{=} \PY{n}{newPort}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kendall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{KenTau}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}129}]:}             RSW      OXIG      MGAM      HLMA       DNO
-           RSW   1.000000  0.465286  0.426206  0.798144  0.797464
-           OXIG  0.465286  1.000000  0.556772  0.530655  0.437165
-           MGAM  0.426206  0.556772  1.000000  0.423881  0.346154
-           HLMA  0.798144  0.530655  0.423881  1.000000  0.777508
-           DNO   0.797464  0.437165  0.346154  0.777508  1.000000
-\end{Verbatim}
-            
-    Kendall tau is non-linear correlation while Pearson is capture only
-linear Kendall tau 's limitation is only capture monotonic correlation
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{newPort}\PY{o}{.}\PY{n}{shape}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}131}]:} (6818, 5)
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}133}]:} \PY{n}{allAssets} \PY{o}{=} \PY{n}{newPort}
-          \PY{n}{allAssets}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{my\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ FSE250}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-\end{Verbatim}
-
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-/home/lin/.pyenv/versions/3.6.3/lib/python3.6/site-packages/ipykernel\_launcher.py:2: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row\_indexer,col\_indexer] = value instead
-
-See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
-  
-
-    \end{Verbatim}
-
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}134}]:} \PY{n}{allAssets}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
-\end{Verbatim}
-
-
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}134}]:}        RSW    OXIG    MGAM   HLMA     DNO    Index
-          0  2544.50  811.30  316.38  706.0  732.24  17135.6
-          1  2540.52  801.35  320.10  698.0  730.28  17146.0
-          2  2587.29  794.38  319.71  713.0  733.22  17249.9
-          3  2597.24  753.07  322.45  712.5  754.30  17273.8
-          4  2635.06  765.01  323.14  716.5  742.04  17249.8
-\end{Verbatim}
-            
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}136}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{sort\PYZus{}LRY} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{Yearly}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
           
-          \PY{n}{miMa} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n}{allAssets}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{allAssets}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
-          \PY{k}{for} \PY{n}{ref\PYZus{}col} \PY{o+ow}{in} \PY{n}{allAssets}\PY{p}{:}
-              \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{allAssets}\PY{p}{:}
-                  \PY{n}{miMa}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{mutual\PYZus{}info\PYZus{}score}\PY{p}{(}\PY{n}{allAssets}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]}\PY{p}{,} \PY{n}{allAssets}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{)}
-          \PY{n}{miMa}
+          \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{logR}\PY{p}{:}
+              \PY{n}{sort\PYZus{}LRY}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{Yearly}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}
+          \PY{n}{sort\PYZus{}LRY}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{k}{def} \PY{n+nf}{HS\PYZus{}var\PYZus{}ESY}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{alpha\PYZus{}one}\PY{p}{,} \PY{n}{alpha\PYZus{}two}\PY{p}{,} \PY{n}{alpha\PYZus{}es}\PY{p}{)}\PY{p}{:}
+              \PY{n}{ind\PYZus{}var\PYZus{}one} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(} \PY{n}{data}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{alpha\PYZus{}one}\PY{p}{)}\PY{p}{)}
+              \PY{n}{ind\PYZus{}var\PYZus{}two} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(} \PY{n}{data}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{alpha\PYZus{}two}\PY{p}{)}\PY{p}{)}
+              \PY{n}{ind\PYZus{}es} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(} \PY{n}{data}\PY{o}{.}\PY{n}{size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{alpha\PYZus{}es}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+              \PY{n}{HS\PYZus{}var\PYZus{}ones} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}one}\PY{p}{]}
+              \PY{n}{HS\PYZus{}var\PYZus{}twos} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{ind\PYZus{}var\PYZus{}two}\PY{p}{]}
+              \PY{n}{HS\PYZus{}ES} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{n}{ind\PYZus{}es}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+              
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Historical 5}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ Var is : }\PY{l+s+si}{\PYZob{}HS\PYZus{}var\PYZus{}ones\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}print(f\PYZsq{}Historical \PYZob{}alpha\PYZus{}two * 100\PYZcb{}\PYZpc{} Var is : \PYZob{}HS\PYZus{}var\PYZus{}twos\PYZcb{}\PYZsq{})}
+              \PY{c+c1}{\PYZsh{}print(f\PYZsq{}Historical \PYZob{}alpha\PYZus{}es * 100\PYZcb{}\PYZpc{} ES is : \PYZob{}HS\PYZus{}ES\PYZcb{}\PYZsq{})}
+          
+              \PY{k}{return} \PY{n}{HS\PYZus{}var\PYZus{}ones}
+          
+          \PY{c+c1}{\PYZsh{}In put is sorted (accending) log returns, when calculating var and ES, using floor of the index (size * alpha)}
+          
+          \PY{c+c1}{\PYZsh{}example for sorting}
+          
+          \PY{c+c1}{\PYZsh{}sortedreturn = np.asarray(np.sort(re20))}
+          \PY{c+c1}{\PYZsh{}sortedreturn = np.asarray(logR.sort\PYZus{}values())}
+\end{Verbatim}
+
+
+    \hypertarget{diff-var-index-defined-as-cap-of-sizealpha}{%
+\subsection{Diff : var index defined as cap of
+size*alpha}\label{diff-var-index-defined-as-cap-of-sizealpha}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{sort\PYZus{}LR}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{For stock }\PY{l+s+si}{\PYZob{}col\PYZcb{}}\PY{l+s+s1}{ yearly return}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{HS\PYZus{}var\PYZus{}ESY}\PY{p}{(}\PY{n}{sort\PYZus{}LRY}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For stock S1 yearly return
+Historical 5\% Var is : -1.8605826910411751
+For stock S2 yearly return
+Historical 5\% Var is : -0.9472265321626683
+For stock S3 yearly return
+Historical 5\% Var is : -1.7044290620873686
+
+    \end{Verbatim}
+
+    For stock S1 daily return, Historical 5\% Var is : -0.06415930785472801
+For stock S2 daily return, Historical 5\% Var is : -0.03722934176835602
+For stock S3 daily return, Historical 5\% Var is : -0.06178435253208292
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{VarScaled\PYZus{}S1} \PY{o}{=} \PY{l+m+mi}{250} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mf}{2.093595854216556}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.06415930785472801}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scaled yearly Var for S1 is }\PY{l+s+si}{\PYZob{}VarScaled\PYZus{}S1\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Scaled yearly Var for S1 is -0.8966620198893082
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{n}{VarScaled\PYZus{}S2} \PY{o}{=} \PY{l+m+mi}{250} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mf}{2.377002203068422}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.03722934176835602}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scaled yearly Var for S2 is }\PY{l+s+si}{\PYZob{}VarScaled\PYZus{}S2\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Scaled yearly Var for S2 is -0.3799214814641398
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{n}{VarScaled\PYZus{}S3} \PY{o}{=} \PY{l+m+mi}{250} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mf}{1.809218385527358}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.06178435253208292}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Scaled yearly Var for S3 is }\PY{l+s+si}{\PYZob{}VarScaled\PYZus{}S3\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Scaled yearly Var for S3 is -1.307012025597282
+
+    \end{Verbatim}
+
+    Scaled Var have lower absolute value means they are not as save as HS
+ones. However we can see that the lower the tail exponents, the fatter
+tail it predict, and the higher losee it indicates, e.g.~S3
+
+    \hypertarget{q5}{%
+\subsection{Q5}\label{q5}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{n}{logR}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}136}]:}             RSW      OXIG      MGAM      HLMA       DNO     Index
-           RSW   7.705392  6.710876  6.927814  6.779426  6.750474  7.671663
-           OXIG  6.710876  7.520116  6.721991  6.547011  6.523039  7.486996
-           MGAM  6.927814  6.721991  7.886943  6.810198  6.697654  7.853214
-           HLMA  6.779426  6.547011  6.810198  7.615197  6.552787  7.580934
-           DNO   6.750474  6.523039  6.697654  6.552787  7.466092  7.431956
-          Index  7.671663  7.486996  7.853214  7.580934  7.431956  8.773098
+{\color{outcolor}Out[{\color{outcolor}118}]:}                 S1           S2           S3
+          count  2499.000000  2499.000000  2499.000000
+          mean      0.000206    -0.000182    -0.000565
+          std       0.045696     0.031346     0.054522
 \end{Verbatim}
             
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{KenTau} \PY{o}{=} \PY{n}{allAssets}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kendall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-          \PY{n}{KenTau}
+{\color{incolor}In [{\color{incolor}119}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{logR}\PY{p}{:}
+              \PY{n}{a} \PY{o}{=} \PY{n}{logR}\PY{p}{[}\PY{n}{col}\PY{p}{]}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Log likelyhood for stock }\PY{l+s+si}{\PYZob{}col\PYZcb{}}\PY{l+s+s1}{ :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{b}\PY{p}{)}
 \end{Verbatim}
 
 
-\begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}137}]:}             RSW      OXIG      MGAM      HLMA       DNO     Index
-           RSW   1.000000  0.465286  0.426206  0.798144  0.797464  0.855035
-           OXIG  0.465286  1.000000  0.556772  0.530655  0.437165  0.469570
-           MGAM  0.426206  0.556772  1.000000  0.423881  0.346154  0.475658
-           HLMA  0.798144  0.530655  0.423881  1.000000  0.777508  0.812092
-           DNO   0.797464  0.437165  0.346154  0.777508  1.000000  0.806611
-          Index  0.855035  0.469570  0.475658  0.812092  0.806611  1.000000
-\end{Verbatim}
-            
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}138}]:} \PY{n}{corrcoeff} \PY{o}{=} \PY{n}{allAssets}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+Log likelyhood for stock S1 :
+4165.871528980833
+Log likelyhood for stock S2 :
+5107.753686042131
+Log likelyhood for stock S3 :
+3724.5310269669044
+
+    \end{Verbatim}
+
+    \hypertarget{q6}{%
+\subsection{Q6}\label{q6}}
+
+    \hypertarget{q7}{%
+\subsection{Q7}\label{q7}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{corrcoeff} \PY{o}{=} \PY{n}{logR}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
           \PY{n}{corrcoeff}
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}138}]:}             RSW      OXIG      MGAM      HLMA       DNO     Index
-           RSW   1.000000  0.896548  0.736502  0.965742  0.968856  0.924308
-           OXIG  0.896548  1.000000  0.742184  0.910246  0.897473  0.766453
-           MGAM  0.736502  0.742184  1.000000  0.734705  0.717033  0.714831
-           HLMA  0.965742  0.910246  0.734705  1.000000  0.967579  0.918142
-           DNO   0.968856  0.897473  0.717033  0.967579  1.000000  0.928147
-          Index  0.924308  0.766453  0.714831  0.918142  0.928147  1.000000
+{\color{outcolor}Out[{\color{outcolor}120}]:}           S1        S2        S3
+          S1  1.000000  0.196510  0.297266
+          S2  0.196510  1.000000  0.238568
+          S3  0.297266  0.238568  1.000000
 \end{Verbatim}
             
+    Most correlated pair is S1 and S3 with correlation 0.297266
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{KenTau} \PY{o}{=} \PY{n}{logR}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kendall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{KenTau}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}124}]:}           S1        S2        S3
+          S1  1.000000  0.204007  0.248653
+          S2  0.204007  1.000000  0.263681
+          S3  0.248653  0.263681  1.000000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{spearmanRank} \PY{o}{=} \PY{n}{logR}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spearman}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{spearmanRank}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}125}]:}           S1        S2        S3
+          S1  1.000000  0.294712  0.347430
+          S2  0.294712  1.000000  0.374042
+          S3  0.347430  0.374042  1.000000
+\end{Verbatim}
+            
+    These two agreed with that most correlated pair is S2 and S3 which are
+diff form Pearson. Potential reasons are 1) These two capture non-linear
+correlations that Pearson does not capture 2) these two capture only
+monotonic correlations
+
+For all three type of correlations, all correlations are positive
+
+    \hypertarget{q8}{%
+\subsection{Q8}\label{q8}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{n}{R\PYZus{}Port} \PY{o}{=} \PY{n}{logR}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.297266} \PY{o}{*} \PY{p}{(}\PY{l+m+mf}{0.045696} \PY{o}{/} \PY{l+m+mf}{0.054522}\PY{p}{)} \PY{o}{*} \PY{n}{logR}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean return of this portfolio is }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{R\PYZus{}Port}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Mean return of this portfolio is 
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}133}]:} 0.00034691440498137827
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}134}]:} \PY{n}{SortPort} \PY{o}{=} \PY{n}{R\PYZus{}Port}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{n}{SortPort}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}136}]:} 0      -0.458405
+          1      -0.336894
+          2      -0.279572
+          3      -0.243253
+          4      -0.219205
+          5      -0.218581
+          6      -0.216567
+          7      -0.204693
+          8      -0.189592
+          9      -0.171364
+          10     -0.168541
+          11     -0.167035
+          12     -0.164339
+          13     -0.162952
+          14     -0.159540
+          15     -0.158301
+          16     -0.151918
+          17     -0.149789
+          18     -0.140624
+          19     -0.140105
+          20     -0.134969
+          21     -0.131436
+          22     -0.131292
+          23     -0.131154
+          24     -0.130966
+          25     -0.128006
+          26     -0.126725
+          27     -0.124037
+          28     -0.123290
+          29     -0.123143
+                    {\ldots}   
+          2469    0.115284
+          2470    0.117585
+          2471    0.117822
+          2472    0.119394
+          2473    0.121088
+          2474    0.122997
+          2475    0.124338
+          2476    0.125237
+          2477    0.127945
+          2478    0.129148
+          2479    0.129395
+          2480    0.129438
+          2481    0.131391
+          2482    0.141639
+          2483    0.145360
+          2484    0.149205
+          2485    0.154092
+          2486    0.159307
+          2487    0.160251
+          2488    0.162897
+          2489    0.166323
+          2490    0.169750
+          2491    0.182962
+          2492    0.208313
+          2493    0.212509
+          2494    0.218125
+          2495    0.278788
+          2496    0.290148
+          2497    0.358988
+          2498    0.524773
+          Length: 2499, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{For portfolio,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{c} \PY{o}{=} \PY{n}{HS\PYZus{}var\PYZus{}ES}\PY{p}{(}\PY{n}{SortPort}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For portfolio,
+Historical 5\% Var is : -0.05816242305521469
+
+    \end{Verbatim}
+
+    For stock S1, Historical 5\% Var is : -0.06415930785472801
+
+Confirmed the portfolio has lower absolute value of Var5\%
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{bootstrap\PYZus{}test}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pearson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{times}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{realCorr} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{n}{method}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{realCorr}\PY{p}{)}
+            \PY{n}{permuted} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+            \PY{n}{counts} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+            \PY{n}{minCorr} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+            \PY{n}{maxCorr} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+        
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+                \PY{n}{one\PYZus{}update} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+        
+                \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                    \PY{n}{permuted}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                \PY{n}{ranCorr} \PY{o}{=} \PY{n}{permuted}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method} \PY{o}{=} \PY{n}{method}\PY{p}{)}
+        
+                \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{ranCorr}\PY{p}{:}
+                    \PY{k}{for} \PY{n}{ref\PYZus{}col} \PY{o+ow}{in} \PY{n}{ranCorr}\PY{p}{:}
+                        \PY{k}{if} \PY{n}{ranCorr}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{realCorr}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]}\PY{p}{:}
+                            \PY{n}{one\PYZus{}update}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                        \PY{k}{if} \PY{n}{ranCorr}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{minCorr}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]}\PY{p}{:}
+                            \PY{n}{minCorr}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]} \PY{o}{=} \PY{n}{ranCorr}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]}
+                        \PY{k}{if} \PY{n}{ranCorr}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{maxCorr}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]}\PY{p}{:}
+                            \PY{n}{maxCorr}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]} \PY{o}{=} \PY{n}{ranCorr}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{ref\PYZus{}col}\PY{p}{]}
+                            
+                \PY{c+c1}{\PYZsh{}print(one\PYZus{}update)}
+                \PY{n}{counts} \PY{o}{=} \PY{n}{counts} \PY{o}{+} \PY{n}{one\PYZus{}update}
+                
+            \PY{k}{return} \PY{n}{counts}\PY{o}{/}\PY{n}{times}\PY{p}{,} \PY{n}{maxCorr}\PY{p}{,} \PY{n}{minCorr}
+        
+            
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{bootstrap\PYZus{}test}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pearson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{times}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+            \PY{n}{Boot} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+            \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+                \PY{n}{Boot}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            \PY{n}{R\PYZus{}Port} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{Boot}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{S3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
 
     % Add a bibliography block to the postdoc
     
